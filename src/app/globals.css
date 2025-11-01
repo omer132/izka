@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes route-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+:root {
+  --bg: #0A0A0A;
+  --fg: #ffffff;
+  --accent: #F2C100;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  color: var(--fg);
+  background: var(--bg);
+}
+
+.container-px {
+  @apply px-4 sm:px-6 lg:px-8;
+}
+
+
+
