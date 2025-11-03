@@ -238,6 +238,35 @@ export async function GET() {
       }
     }
 
+    // Pattern 7: HTML'den direkt görsel URL'lerini çek (son çare)
+    let extractedMedia: Array<{ id: string; imageUrl: string; permalink: string; isReel: boolean }> = [];
+    
+    if (posts.length === 0) {
+      // HTML'den img src'lerini veya data-src'lerini çek
+      const imgMatches = html.matchAll(/<img[^>]+(?:src|data-src)=["']([^"']*(?:\.jpg|\.jpeg|\.png|\.webp)[^"']*)["'][^>]*>/gi);
+      const seenUrls = new Set<string>();
+      
+      for (const match of imgMatches) {
+        const imgUrl = match[1];
+        // Instagram CDN URL'lerini filtrele
+        if (imgUrl && (imgUrl.includes('instagram.com') || imgUrl.includes('cdninstagram.com')) && !seenUrls.has(imgUrl)) {
+          // Profil resmi değilse ekle
+          if (!imgUrl.includes('profile') && !imgUrl.includes('avatar')) {
+            seenUrls.add(imgUrl);
+            extractedMedia.push({
+              id: `extracted-${seenUrls.size}`,
+              imageUrl: imgUrl,
+              permalink: `https://www.instagram.com/${username}/`,
+              isReel: false,
+            });
+            
+            // Sadece 3 görsel al
+            if (extractedMedia.length >= 3) break;
+          }
+        }
+      }
+    }
+
     // Profil bilgileri varsa döndür (görseller olmasa bile)
     if (userData) {
       const media = posts.length > 0 
@@ -249,8 +278,8 @@ export async function GET() {
               permalink: `https://instagram.com/p/${node.shortcode}/`,
               isReel: node.__typename === 'GraphVideo' || node.is_video || false,
             };
-          }).filter(m => m.imageUrl)
-        : [];
+          }).filter((m: { imageUrl: string }) => m.imageUrl)
+        : extractedMedia.slice(0, 3);
 
       return NextResponse.json({
         profile: {
@@ -263,24 +292,29 @@ export async function GET() {
       });
     }
 
-    // Eğer hiçbir yöntem çalışmazsa hata döndür
-    throw new Error('Instagram verileri parse edilemedi');
+    // Eğer hiçbir yöntem çalışmazsa fallback config döndür (hata fırlatma)
+    return NextResponse.json({
+      profile: {
+        username: 'izkaokculuk',
+        followers: 0,
+        posts: 0,
+        profileImage: '',
+      },
+      media: extractedMedia.slice(0, 3),
+    });
     
   } catch (error: any) {
     console.error('Instagram fetch hatası:', error);
-    return NextResponse.json(
-      {
-        profile: {
-          username: 'izkaokculuk',
-          followers: 0,
-          posts: 0,
-          profileImage: '',
-        },
-        media: [],
-        error: error?.message || 'Instagram verileri çekilemedi',
+    // Hata durumunda da 200 döndür, fallback config ile
+    return NextResponse.json({
+      profile: {
+        username: 'izkaokculuk',
+        followers: 0,
+        posts: 0,
+        profileImage: '',
       },
-      { status: 500 }
-    );
+      media: [],
+    });
   }
 }
 
