@@ -2,13 +2,13 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 mt-12">
-      <div className="container-px mx-auto py-8 grid gap-6 md:grid-cols-3 items-center">
-        <div className="text-white/70 text-sm">
+    <footer className="border-t border-white/10 mt-8 sm:mt-12">
+      <div className="container-px mx-auto py-6 sm:py-8 grid gap-4 sm:gap-6 md:grid-cols-3 items-center">
+        <div className="text-white/70 text-xs sm:text-sm text-center md:text-left">
           © {new Date().getFullYear()} İZKA Okçuluk Kulübü
         </div>
         <div className="text-center">
-          <span className="font-semibold text-white">Bizi Takip Edin</span>
+          <span className="font-semibold text-white text-sm sm:text-base">Bizi Takip Edin</span>
           <div className="mt-2 flex justify-center gap-3">
             <Link
               href="https://www.instagram.com/izkaokculuk"

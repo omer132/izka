@@ -4,11 +4,10 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     const name = String(data?.name || '').trim();
-    const email = String(data?.email || '').trim();
     const phone = String(data?.phone || '').trim();
     const message = String(data?.message || '').trim();
 
-    if (!name || !email || !message) {
+    if (!name || !message) {
       return NextResponse.json(
         { error: 'Zorunlu alanlar eksik' },
         { status: 400 }
@@ -22,6 +21,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Sunucu hatası' }, { status: 500 });
   }
 }
+
+
 
 
 

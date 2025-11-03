@@ -35,7 +35,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         <div>
           <label className="block text-sm text-white/80">Ad Soyad</label>
           <input
@@ -43,16 +43,6 @@ export function ContactForm() {
             required
             className="mt-1 w-full rounded-md bg-black/40 border border-white/10 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-izkaYellow"
             placeholder="Adınız"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-white/80">E‑posta</label>
-          <input
-            type="email"
-            name="email"
-            required
-            className="mt-1 w-full rounded-md bg-black/40 border border-white/10 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-izkaYellow"
-            placeholder="ornek@mail.com"
           />
         </div>
       </div>
@@ -80,7 +70,7 @@ export function ContactForm() {
         disabled={formState === 'submitting'}
         className="rounded-md bg-izkaYellow px-6 py-3 text-black font-semibold hover:brightness-95 disabled:opacity-60"
       >
-        {formState === 'submitting' ? 'Gönderiliyor…' : 'Gönder'}
+        {formState === 'submitting' ? 'Gönderiliyor…' : 'Mesaj Gönder'}
       </button>
       {message && (
         <p
