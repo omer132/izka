@@ -38,7 +38,7 @@ export function Hero() {
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3">
             <Link
-              href="https://wa.me/905000000000"
+              href="https://wa.me/905061651179"
               target="_blank"
               className="inline-flex justify-center rounded-md border-2 border-izkaYellow px-5 py-2.5 sm:px-6 sm:py-3 text-izkaYellow hover:bg-izkaYellow hover:text-black transition text-sm sm:text-base"
             >

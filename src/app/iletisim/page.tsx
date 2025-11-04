@@ -17,7 +17,7 @@ export default function ContactPage() {
         {/* WhatsApp ve Telefon Butonları */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <a
-            href="https://wa.me/905000000000"
+            href="https://wa.me/905061651179"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 rounded-md bg-[#25D366] px-4 sm:px-6 py-2.5 sm:py-3 text-white font-semibold hover:brightness-95 transition text-sm sm:text-base"
@@ -29,7 +29,7 @@ export default function ContactPage() {
             <span className="sm:hidden">WhatsApp</span>
           </a>
           <a
-            href="tel:+905000000000"
+            href="tel:+905061651179"
             className="flex items-center justify-center gap-2 rounded-md bg-izkaYellow px-4 sm:px-6 py-2.5 sm:py-3 text-black font-semibold hover:brightness-95 transition text-sm sm:text-base"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
